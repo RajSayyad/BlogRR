@@ -1839,3 +1839,721 @@ Processing by BlogsController#index as HTML
 Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/blogs" for ::1 at 2025-03-11 13:26:20 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (3.1ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 102ms (Views: 16.9ms | ActiveRecord: 6.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 13:26:21 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.8ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 9ms (Views: 7.4ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-11 13:26:43 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:17:in `login'
+Completed 401 Unauthorized in 475ms (Views: 0.3ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-11 13:26:51 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:17:in `login'
+Completed 200 OK in 452ms (Views: 1.4ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 13:26:51 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 6ms (Views: 5.7ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 13:26:51 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 6ms (Views: 5.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-11 13:27:10 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"My new Blog", "description"=>"Maja nahi aya ", "blog"=>{"title"=>"My new Blog", "description"=>"Maja nahi aya "}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.RE7t90K40bnmzIuzGo3K3m9Hfe8UafMQU0Iw_7k1oHo
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>1}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 1, name: "Raj", email: [FILTERED], password: nil, created_at: "2025-03-10 09:21:56.672407000 +0000", updated_at: "2025-03-10 09:21:56.672407000 +0000", password_digest: [FILTERED]>
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+  [1m[36mBlog Create (19.9ms)[0m  [1m[32mINSERT INTO "blogs" ("title", "description", "user_id", "created_at", "updated_at") VALUES ('My new Blog', 'Maja nahi aya ', 1, '2025-03-11 07:57:11.132019', '2025-03-11 07:57:11.132019') RETURNING "id" /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+Completed 201 Created in 131ms (Views: 12.2ms | ActiveRecord: 23.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 13:27:11 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 31ms (Views: 30.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/blogs/3" for ::1 at 2025-03-11 13:27:25 +0530
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"My new Blog", "description"=>"Maja aya woh bhi bohot", "id"=>"3", "blog"=>{"title"=>"My new Blog", "description"=>"Maja aya woh bhi bohot"}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.RE7t90K40bnmzIuzGo3K3m9Hfe8UafMQU0Iw_7k1oHo
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>1}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 1, name: "Raj", email: [FILTERED], password: nil, created_at: "2025-03-10 09:21:56.672407000 +0000", updated_at: "2025-03-10 09:21:56.672407000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 1 AND "blogs"."id" = 3 LIMIT 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:27:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:28:in `update'
+  [1m[36mBlog Update (4.9ms)[0m  [1m[33mUPDATE "blogs" SET "description" = 'Maja aya woh bhi bohot', "updated_at" = '2025-03-11 07:57:25.171117' WHERE "blogs"."id" = 3 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:28:in `update'
+Completed 200 OK in 36ms (Views: 0.9ms | ActiveRecord: 5.6ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 13:27:25 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 8ms (Views: 7.4ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/blogs/3" for ::1 at 2025-03-11 13:27:28 +0530
+Processing by BlogsController#destroy as HTML
+  Parameters: {"id"=>"3"}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.RE7t90K40bnmzIuzGo3K3m9Hfe8UafMQU0Iw_7k1oHo
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>1}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 1, name: "Raj", email: [FILTERED], password: nil, created_at: "2025-03-10 09:21:56.672407000 +0000", updated_at: "2025-03-10 09:21:56.672407000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 1 AND "blogs"."id" = 3 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:36:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+  [1m[36mBlog Destroy (5.9ms)[0m  [1m[31mDELETE FROM "blogs" WHERE "blogs"."id" = 3 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+Completed 200 OK in 52ms (Views: 0.4ms | ActiveRecord: 6.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 13:27:28 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/register" for ::1 at 2025-03-11 13:47:18 +0530
+Processing by AuthController#register as HTML
+  Parameters: {"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true}}
+[31mUnpermitted parameters: :confirmPassword, :withCredentials, :auth. Context: { controller: AuthController, action: register, request: #<ActionDispatch::Request:0x00000222078bae68>, params: {"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true, "controller"=>"auth", "action"=>"register", "auth"=>{"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true}} }[0m
+Completed 422 Unprocessable Content in 466ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/register" for ::1 at 2025-03-11 13:50:40 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#register as HTML
+  Parameters: {"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true}}
+[31mUnpermitted parameters: :confirmPassword, :withCredentials. Context: { controller: AuthController, action: register, request: #<ActionDispatch::Request:0x000002637aa3c818>, params: {"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true, "controller"=>"auth", "action"=>"register", "auth"=>{"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true}} }[0m
+Completed 422 Unprocessable Content in 574ms (Views: 0.5ms | ActiveRecord: 4.8ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/register" for ::1 at 2025-03-11 13:53:50 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#register as HTML
+  Parameters: {"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true}}
+[31mUnpermitted parameter: :withCredentials. Context: { controller: AuthController, action: register, request: #<ActionDispatch::Request:0x000001ff80f4b240>, params: {"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true, "controller"=>"auth", "action"=>"register", "auth"=>{"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "confirmPassword"=>"[FILTERED]", "withCredentials"=>true}} }[0m
+Completed 500 Internal Server Error in 544ms (ActiveRecord: 5.3ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'confirmPassword' for User.)
+Caused by: NoMethodError (undefined method `confirmPassword=' for an instance of User)
+
+Information for: ActiveModel::UnknownAttributeError (unknown attribute 'confirmPassword' for User.):
+  
+app/controllers/auth_controller.rb:7:in `register'
+
+Information for cause: NoMethodError (undefined method `confirmPassword=' for an instance of User):
+  
+app/controllers/auth_controller.rb:7:in `register'
+Started POST "/register" for ::1 at 2025-03-11 13:54:51 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#register as HTML
+  Parameters: {"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}}
+[31mUnpermitted parameter: :withCredentials. Context: { controller: AuthController, action: register, request: #<ActionDispatch::Request:0x0000014333955520>, params: {"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "controller"=>"auth", "action"=>"register", "auth"=>{"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mUser Exists? (5.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'hussain@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at", "password_digest") VALUES ('Hussain', 'hussain@gmail.com', NULL, '2025-03-11 08:24:52.500877', '2025-03-11 08:24:52.500877', '$2a$12$ib2reH0k4/PD.E3FqDjBAOADLKRcL2uAImJOI45i5Ycns/pNj6TRi') RETURNING "id" /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+Completed 201 Created in 630ms (Views: 1.6ms | ActiveRecord: 15.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/register" for ::1 at 2025-03-11 13:54:57 +0530
+Processing by AuthController#register as HTML
+  Parameters: {"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}}
+[31mUnpermitted parameter: :withCredentials. Context: { controller: AuthController, action: register, request: #<ActionDispatch::Request:0x00000143360f9e28>, params: {"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "controller"=>"auth", "action"=>"register", "auth"=>{"name"=>"Hussain", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mUser Exists? (5.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'hussain@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TRANSACTION /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+Completed 422 Unprocessable Content in 494ms (Views: 0.3ms | ActiveRecord: 5.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-11 13:55:39 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'hussain@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:22:in `login'
+Completed 200 OK in 470ms (Views: 1.0ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-11 13:59:18 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'hussain@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:22:in `login'
+Completed 200 OK in 470ms (Views: 1.0ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 13:59:37 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 31ms (Views: 19.3ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 13:59:37 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 6ms (Views: 5.4ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/blogs/1" for ::1 at 2025-03-11 13:59:41 +0530
+Processing by BlogsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.PAOIB6o_1qw-qCFFERTr_SGr8P4uoY5K1BfZ1P2ThWw
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>2}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 2, name: "Hussain", email: [FILTERED], password: nil, created_at: "2025-03-11 08:24:52.500877000 +0000", updated_at: "2025-03-11 08:24:52.500877000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 2 AND "blogs"."id" = 1 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:36:in `destroy'
+Completed 404 Not Found in 54ms (ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Blog with 'id'=1 [WHERE "blogs"."user_id" = ?]):
+  
+app/controllers/blogs_controller.rb:36:in `destroy'
+Started POST "/login" for ::1 at 2025-03-11 14:01:09 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:22:in `login'
+Completed 200 OK in 456ms (Views: 1.4ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:03:09 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.8ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 8ms (Views: 6.4ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:03:09 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 6.5ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:03:13 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:03:13 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 5.0ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-11 14:03:32 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:22:in `login'
+Completed 200 OK in 454ms (Views: 0.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:03:48 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:03:48 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/register" for ::1 at 2025-03-11 14:06:00 +0530
+Processing by AuthController#register as HTML
+  Parameters: {"name"=>"Alisha", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"name"=>"Alisha", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}}
+[31mUnpermitted parameter: :withCredentials. Context: { controller: AuthController, action: register, request: #<ActionDispatch::Request:0x000001433395e260>, params: {"name"=>"Alisha", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "controller"=>"auth", "action"=>"register", "auth"=>{"name"=>"Alisha", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}} }[0m
+Completed 422 Unprocessable Content in 462ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/register" for ::1 at 2025-03-11 14:06:22 +0530
+Processing by AuthController#register as HTML
+  Parameters: {"name"=>"Alisha", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"name"=>"Alisha", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}}
+[31mUnpermitted parameter: :withCredentials. Context: { controller: AuthController, action: register, request: #<ActionDispatch::Request:0x00000143332478a0>, params: {"name"=>"Alisha", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "controller"=>"auth", "action"=>"register", "auth"=>{"name"=>"Alisha", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mUser Exists? (6.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'alisha@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at", "password_digest") VALUES ('Alisha', 'alisha@gmail.com', NULL, '2025-03-11 08:36:23.199219', '2025-03-11 08:36:23.199219', '$2a$12$7AgI7RbfNB4Wo8bF1pEGbe8ydxroM2L0aYf.JumdWsAgcrhqhQiN2') RETURNING "id" /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+Completed 201 Created in 494ms (Views: 3.1ms | ActiveRecord: 8.2ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/login" for ::1 at 2025-03-11 14:07:35 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'alisha@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:22:in `login'
+Completed 200 OK in 462ms (Views: 1.4ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:07:36 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:07:36 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-11 14:07:46 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"hdhdhd", "description"=>"hdhdhdh", "blog"=>{"title"=>"hdhdhd", "description"=>"hdhdhdh"}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozfQ.vyAhQspx0pyJlMuLtIYXLsyryU6-nffrjT78Qc4G-DE
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>3}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 3, name: "Alisha", email: [FILTERED], password: nil, created_at: "2025-03-11 08:36:23.199219000 +0000", updated_at: "2025-03-11 08:36:23.199219000 +0000", password_digest: [FILTERED]>
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+  [1m[36mBlog Create (4.9ms)[0m  [1m[32mINSERT INTO "blogs" ("title", "description", "user_id", "created_at", "updated_at") VALUES ('hdhdhd', 'hdhdhdh', 3, '2025-03-11 08:37:47.229963', '2025-03-11 08:37:47.229963') RETURNING "id" /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+Completed 201 Created in 276ms (Views: 1.2ms | ActiveRecord: 5.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:07:47 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/blogs/1" for ::1 at 2025-03-11 14:07:54 +0530
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"My First Blog", "description"=>"I've created this blog to make sure", "id"=>"1", "blog"=>{"title"=>"My First Blog", "description"=>"I've created this blog to make sure"}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozfQ.vyAhQspx0pyJlMuLtIYXLsyryU6-nffrjT78Qc4G-DE
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>3}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 3, name: "Alisha", email: [FILTERED], password: nil, created_at: "2025-03-11 08:36:23.199219000 +0000", updated_at: "2025-03-11 08:36:23.199219000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 3 AND "blogs"."id" = 1 LIMIT 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:27:in `update'
+Completed 404 Not Found in 24ms (ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Blog with 'id'=1 [WHERE "blogs"."user_id" = ?]):
+  
+app/controllers/blogs_controller.rb:27:in `update'
+Started DELETE "/blogs/4" for ::1 at 2025-03-11 14:08:00 +0530
+Processing by BlogsController#destroy as HTML
+  Parameters: {"id"=>"4"}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozfQ.vyAhQspx0pyJlMuLtIYXLsyryU6-nffrjT78Qc4G-DE
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>3}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 3, name: "Alisha", email: [FILTERED], password: nil, created_at: "2025-03-11 08:36:23.199219000 +0000", updated_at: "2025-03-11 08:36:23.199219000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 3 AND "blogs"."id" = 4 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:36:in `destroy'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+  [1m[36mBlog Destroy (5.1ms)[0m  [1m[31mDELETE FROM "blogs" WHERE "blogs"."id" = 4 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+Completed 200 OK in 40ms (Views: 0.3ms | ActiveRecord: 6.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:08:01 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 6.7ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/register" for ::1 at 2025-03-11 14:08:48 +0530
+Processing by AuthController#register as HTML
+  Parameters: {"name"=>"Ramesh", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"name"=>"Ramesh", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}}
+[31mUnpermitted parameter: :withCredentials. Context: { controller: AuthController, action: register, request: #<ActionDispatch::Request:0x0000014332cb0338>, params: {"name"=>"Ramesh", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "controller"=>"auth", "action"=>"register", "auth"=>{"name"=>"Ramesh", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mUser Exists? (9.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'ram@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at", "password_digest") VALUES ('Ramesh', 'ram@gmail.com', NULL, '2025-03-11 08:38:48.902965', '2025-03-11 08:38:48.902965', '$2a$12$g1us9YPoP4XqprEUkm9ftevrybAYSIlzk8esuTCJWpEzEATZlDqie') RETURNING "id" /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+Completed 201 Created in 500ms (Views: 1.1ms | ActiveRecord: 10.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/register" for ::1 at 2025-03-11 14:16:12 +0530
+Processing by AuthController#register as HTML
+  Parameters: {"name"=>"Suresh", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"name"=>"Suresh", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}}
+[31mUnpermitted parameter: :withCredentials. Context: { controller: AuthController, action: register, request: #<ActionDispatch::Request:0x0000014334484888>, params: {"name"=>"Suresh", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true, "controller"=>"auth", "action"=>"register", "auth"=>{"name"=>"Suresh", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "withCredentials"=>true}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mUser Exists? (8.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'sur@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at", "password_digest") VALUES ('Suresh', 'sur@gmail.com', NULL, '2025-03-11 08:46:13.397769', '2025-03-11 08:46:13.397769', '$2a$12$WUKVGw6rPHq7sDu/JSLEv.sIg0i..gjLCaFk/.jjxy4QZQTURZr56') RETURNING "id" /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:13:in `register'
+Completed 201 Created in 487ms (Views: 1.2ms | ActiveRecord: 12.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:16:13 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:16:13 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 8ms (Views: 7.4ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-11 14:16:38 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'sur@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:22:in `login'
+Completed 200 OK in 457ms (Views: 1.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:16:39 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 18ms (Views: 17.4ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:16:39 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 8ms (Views: 7.4ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/blogs/1" for ::1 at 2025-03-11 14:16:40 +0530
+Processing by BlogsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.DbggeCJelG1M5tO-9TOvbMbonAIz-h7ZluDlcL77t90
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>5}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 5, name: "Suresh", email: [FILTERED], password: nil, created_at: "2025-03-11 08:46:13.397769000 +0000", updated_at: "2025-03-11 08:46:13.397769000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 5 AND "blogs"."id" = 1 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:36:in `destroy'
+Completed 404 Not Found in 28ms (ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Blog with 'id'=1 [WHERE "blogs"."user_id" = ?]):
+  
+app/controllers/blogs_controller.rb:36:in `destroy'
+Started GET "/blogs" for ::1 at 2025-03-11 14:19:35 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.5ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 24ms (Views: 23.4ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/blogs/1" for ::1 at 2025-03-11 14:19:48 +0530
+Processing by BlogsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.DbggeCJelG1M5tO-9TOvbMbonAIz-h7ZluDlcL77t90
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>5}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 5, name: "Suresh", email: [FILTERED], password: nil, created_at: "2025-03-11 08:46:13.397769000 +0000", updated_at: "2025-03-11 08:46:13.397769000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 5 AND "blogs"."id" = 1 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:36:in `destroy'
+Completed 404 Not Found in 18ms (ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Blog with 'id'=1 [WHERE "blogs"."user_id" = ?]):
+  
+app/controllers/blogs_controller.rb:36:in `destroy'
+Started POST "/login" for ::1 at 2025-03-11 14:21:38 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'hussain@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:22:in `login'
+Completed 200 OK in 585ms (Views: 1.7ms | ActiveRecord: 5.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:21:39 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:10:in `index'
+Completed 200 OK in 32ms (Views: 18.0ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:21:40 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:10:in `index'
+Completed 200 OK in 6ms (Views: 5.6ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/blogs/1" for ::1 at 2025-03-11 14:21:41 +0530
+Processing by BlogsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:58:in `authorize_request'
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `role' for an instance of User):
+  
+app/controllers/blogs_controller.rb:61:in `authorize_request'
+Started DELETE "/blogs/1" for ::1 at 2025-03-11 14:21:46 +0530
+Processing by BlogsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:58:in `authorize_request'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `role' for an instance of User):
+  
+app/controllers/blogs_controller.rb:61:in `authorize_request'
+Started GET "/blogs" for ::1 at 2025-03-11 14:26:24 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (3.5ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 42ms (Views: 26.1ms | ActiveRecord: 5.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-11 14:27:48 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"Hussain's Blog", "description"=>"This blog is created by Hussain", "blog"=>{"title"=>"Hussain's Blog", "description"=>"This blog is created by Hussain"}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.PAOIB6o_1qw-qCFFERTr_SGr8P4uoY5K1BfZ1P2ThWw
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>2}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 2, name: "Hussain", email: [FILTERED], password: nil, created_at: "2025-03-11 08:24:52.500877000 +0000", updated_at: "2025-03-11 08:24:52.500877000 +0000", password_digest: [FILTERED]>
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+  [1m[36mBlog Create (9.4ms)[0m  [1m[32mINSERT INTO "blogs" ("title", "description", "user_id", "created_at", "updated_at") VALUES ('Hussain''s Blog', 'This blog is created by Hussain', 2, '2025-03-11 08:57:49.230846', '2025-03-11 08:57:49.230846') RETURNING "id" /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+Completed 201 Created in 209ms (Views: 1.2ms | ActiveRecord: 19.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:27:49 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/blogs/5" for ::1 at 2025-03-11 14:27:54 +0530
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"Hussain's Blog", "description"=>"This blog is created by Hussain", "id"=>"5", "blog"=>{"title"=>"Hussain's Blog", "description"=>"This blog is created by Hussain"}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.PAOIB6o_1qw-qCFFERTr_SGr8P4uoY5K1BfZ1P2ThWw
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>2}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 2, name: "Hussain", email: [FILTERED], password: nil, created_at: "2025-03-11 08:24:52.500877000 +0000", updated_at: "2025-03-11 08:24:52.500877000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 2 AND "blogs"."id" = 5 LIMIT 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:27:in `update'
+Completed 200 OK in 19ms (Views: 1.0ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:27:54 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/blogs/5" for ::1 at 2025-03-11 14:28:07 +0530
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"Hussain's Blog", "description"=>"This blog is created and Edited by Hussain", "id"=>"5", "blog"=>{"title"=>"Hussain's Blog", "description"=>"This blog is created and Edited by Hussain"}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.PAOIB6o_1qw-qCFFERTr_SGr8P4uoY5K1BfZ1P2ThWw
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>2}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 2, name: "Hussain", email: [FILTERED], password: nil, created_at: "2025-03-11 08:24:52.500877000 +0000", updated_at: "2025-03-11 08:24:52.500877000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 2 AND "blogs"."id" = 5 LIMIT 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:27:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:28:in `update'
+  [1m[36mBlog Update (8.7ms)[0m  [1m[33mUPDATE "blogs" SET "description" = 'This blog is created and Edited by Hussain', "updated_at" = '2025-03-11 08:58:08.006712' WHERE "blogs"."id" = 5 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:28:in `update'
+Completed 200 OK in 49ms (Views: 1.0ms | ActiveRecord: 9.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:28:08 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 6ms (Views: 5.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-11 14:28:23 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:22:in `login'
+Completed 200 OK in 469ms (Views: 1.4ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:28:24 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:28:24 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/blogs/1" for ::1 at 2025-03-11 14:28:31 +0530
+Processing by BlogsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.RE7t90K40bnmzIuzGo3K3m9Hfe8UafMQU0Iw_7k1oHo
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>1}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 1, name: "Raj", email: [FILTERED], password: nil, created_at: "2025-03-10 09:21:56.672407000 +0000", updated_at: "2025-03-10 09:21:56.672407000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 1 AND "blogs"."id" = 1 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:36:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+  [1m[36mBlog Destroy (12.2ms)[0m  [1m[31mDELETE FROM "blogs" WHERE "blogs"."id" = 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+Completed 200 OK in 45ms (Views: 0.6ms | ActiveRecord: 12.9ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:28:31 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-11 14:28:50 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"Blog by Raj", "description"=>"This Blog is Created by Raj", "blog"=>{"title"=>"Blog by Raj", "description"=>"This Blog is Created by Raj"}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.RE7t90K40bnmzIuzGo3K3m9Hfe8UafMQU0Iw_7k1oHo
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>1}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 1, name: "Raj", email: [FILTERED], password: nil, created_at: "2025-03-10 09:21:56.672407000 +0000", updated_at: "2025-03-10 09:21:56.672407000 +0000", password_digest: [FILTERED]>
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+  [1m[36mBlog Create (17.5ms)[0m  [1m[32mINSERT INTO "blogs" ("title", "description", "user_id", "created_at", "updated_at") VALUES ('Blog by Raj', 'This Blog is Created by Raj', 1, '2025-03-11 08:58:50.157103', '2025-03-11 08:58:50.157103') RETURNING "id" /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+Completed 201 Created in 46ms (Views: 4.3ms | ActiveRecord: 18.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-11 14:28:50 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 8ms (Views: 7.2ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+

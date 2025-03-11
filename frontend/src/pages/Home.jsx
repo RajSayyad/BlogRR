@@ -6,8 +6,23 @@ const Home = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [editingPost, setEditingPost] = useState(null);
+  const [userId, setUserId] = useState(null); // Store logged-in user ID
 
-  // Function to fetch all blogs
+  // Extract user ID from JWT token
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1])); // Decode JWT payload
+        setUserId(payload.user_id); // Extract user ID
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    }
+    fetchBlogs();
+  }, []);
+
+  // Fetch all blog posts
   const fetchBlogs = () => {
     const token = localStorage.getItem("token");
 
@@ -18,26 +33,21 @@ const Home = () => {
     .catch((err) => console.error("Error fetching blogs:", err));
   };
 
-  // Fetch blogs on mount
-  useEffect(() => {
-    fetchBlogs();
-  }, []);
-
   // Handle form submission for creating and updating blogs
   const handleSubmit = async (e) => {
     e.preventDefault();
     const blogData = { title, description };
-    const token = localStorage.getItem("token"); // Retrieve token
-  
+    const token = localStorage.getItem("token");
+
     try {
       if (editingPost) {
         await API.put(`/blogs/${editingPost.id}`, blogData, {
-          headers: { Authorization: `Bearer ${token}` } // Send token
+          headers: { Authorization: `Bearer ${token}` }
         });
         setEditingPost(null);
       } else {
         await API.post("/blogs", blogData, {
-          headers: { Authorization: `Bearer ${token}` } // Send token
+          headers: { Authorization: `Bearer ${token}` }
         });
       }
       setTitle('');
@@ -47,7 +57,7 @@ const Home = () => {
       console.error("Error submitting blog:", error);
     }
   };
-  
+
   // Handle delete
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token");
@@ -71,7 +81,7 @@ const Home = () => {
   return (
     <div className="max-w-3xl mx-auto p-4">
       <h1 className="text-3xl font-bold text-center mb-6">Blog Posts</h1>
-      
+
       {/* Form for adding and updating blogs */}
       <form onSubmit={handleSubmit} className="mb-6 p-4 border rounded-lg shadow-lg bg-gray-100">
         <input 
@@ -93,27 +103,31 @@ const Home = () => {
           {editingPost ? "Update Blog" : "Add Blog"}
         </button>
       </form>
-      
+
       {/* List of blog posts */}
       {posts.length > 0 ? (
         posts.map((post) => (
           <div key={post.id} className="mb-4 p-4 border rounded-lg shadow-md bg-white">
             <h2 className="text-xl font-bold">{post.title}</h2>
             <p className="text-gray-600">{post.description}</p>
-            <div className="flex gap-2 mt-2">
-              <button 
-                onClick={() => handleEdit(post)} 
-                className="bg-yellow-400 text-white px-4 py-1 rounded-lg"
-              >
-                Edit
-              </button>
-              <button 
-                onClick={() => handleDelete(post.id)} 
-                className="bg-red-500 text-white px-4 py-1 rounded-lg"
-              >
-                Delete
-              </button>
-            </div>
+
+            {/* Show Edit/Delete buttons only if the logged-in user created the blog */}
+            {post.user_id === userId && (
+              <div className="flex gap-2 mt-2">
+                <button 
+                  onClick={() => handleEdit(post)} 
+                  className="bg-yellow-400 text-white px-4 py-1 rounded-lg"
+                >
+                  Edit
+                </button>
+                <button 
+                  onClick={() => handleDelete(post.id)} 
+                  className="bg-red-500 text-white px-4 py-1 rounded-lg"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
         ))
       ) : (

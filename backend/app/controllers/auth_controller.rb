@@ -4,12 +4,17 @@ class AuthController < ApplicationController
 
 
     def register
-        user= User.new(user_params)
+        user = User.new(user_params)
+        
+        if params[:password] != params[:password_confirmation]
+          return render json: { message: 'Passwords don’t match' }, status: :unprocessable_entity
+        end
+    
         if user.save
-            token = encode_token(user.id)
-            render json: {user: user, token: token}, status: :created
+          token = encode_token(user.id)
+          render json: { user: user, token: token }, status: :created
         else
-            render json: {message: 'Failed to Register'}, status: :unprocessable_entity
+          render json: { message: 'Failed to Register', errors: user.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
@@ -31,7 +36,8 @@ class AuthController < ApplicationController
     end
 
     def user_params
-        params.permit(:name, :email, :password, :password_confirmation)
-    end
+        params.require(:auth).permit(:name, :email, :password, :password_confirmation)
+      end
+      
     
 end
