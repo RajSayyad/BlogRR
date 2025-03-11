@@ -1,0 +1,1841 @@
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='Backend'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-03-10 07:48:11.567921', '2025-03-10 07:48:11.567930') RETURNING "key" /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Migrating to CreateUsers (20250310074412)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[35m (11.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (2.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250310074412') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+Migrating to CreateBlogs (20250310074749)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[35m (25.2ms)[0m  [1m[35mCREATE TABLE "blogs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" varchar, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_40ebb3948d"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='Backend'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_blogs_on_user_id" ON "blogs" ("user_id") /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250310074749') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Migrating to AddPasswordDigestToUsers (20250310092127)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[35m (4.8ms)[0m  [1m[35mALTER TABLE "users" ADD "password_digest" varchar /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250310092127') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (6.7ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mUser Exists? (5.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at", "password_digest") VALUES ('Raj', 'raj@gmail.com', NULL, '2025-03-10 09:21:56.672407', '2025-03-10 09:21:56.672407', '$2a$12$3z3S5oXZjhFj2T7v3uWiTuNqpXouiLxZIE96b9u7MrL.tUP8OCYde') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mUser Exists? (4.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mUser Exists? (5.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mBlog Create (0.8ms)[0m  [1m[32mINSERT INTO "blogs" ("title", "description", "user_id", "created_at", "updated_at") VALUES ('My First Blog', 'I''ve Created this blog to make sure API is working', NULL, '2025-03-10 09:23:21.281374', '2025-03-10 09:23:21.281374') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TRANSACTION /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mUser Exists? (4.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION /*application='Backend'*/[0m
+Started POST "/login" for ::1 at 2025-03-10 14:56:26 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  
+SyntaxError (C:/Users/Raj/Desktop/Files/Personal Projects/RoR and React/BlogRR/backend/app/controllers/auth_controller.rb:9: syntax error, unexpected symbol literal, expecting `do' or '{' or '('
+...: user, token: token}, status :created
+...                              ^
+C:/Users/Raj/Desktop/Files/Personal Projects/RoR and React/BlogRR/backend/app/controllers/auth_controller.rb:11: syntax error, unexpected '}', expecting =>
+...er json: {'Failed to Register'}, status :unprocessable_entity
+...                              ^
+C:/Users/Raj/Desktop/Files/Personal Projects/RoR and React/BlogRR/backend/app/controllers/auth_controller.rb:21: syntax error, unexpected '}', expecting =>
+...ender json: {'Failed to login'}, status: :unauthorized
+...                              ^
+):
+  
+app/controllers/auth_controller.rb:9: syntax error, unexpected symbol literal, expecting `do' or '{' or '('
+app/controllers/auth_controller.rb:11: syntax error, unexpected '}', expecting =>
+app/controllers/auth_controller.rb:21: syntax error, unexpected '}', expecting =>
+Started POST "/login" for ::1 at 2025-03-10 14:59:33 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NameError (uninitialized constant AuthController::Users):
+  
+app/controllers/auth_controller.rb:16:in `login'
+Started POST "/login" for ::1 at 2025-03-10 15:01:09 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `findby' for class User):
+  
+app/controllers/auth_controller.rb:16:in `login'
+Started POST "/login" for ::1 at 2025-03-10 15:01:11 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `findby' for class User):
+  
+app/controllers/auth_controller.rb:16:in `login'
+Started POST "/login" for ::1 at 2025-03-10 15:02:27 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `login'
+Completed 500 Internal Server Error in 466ms (ActiveRecord: 7.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `user_id' for an instance of AuthController):
+  
+app/controllers/auth_controller.rb:18:in `login'
+Started POST "/login" for ::1 at 2025-03-10 15:04:02 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `login'
+Completed 200 OK in 470ms (Views: 1.1ms | ActiveRecord: 11.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-10 15:06:16 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `login'
+Completed 200 OK in 355ms (Views: 0.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-10 15:07:33 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `login'
+Completed 200 OK in 380ms (Views: 1.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/login" for ::1 at 2025-03-10 15:08:18 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `login'
+Completed 200 OK in 359ms (Views: 0.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts" for ::1 at 2025-03-10 15:08:18 +0530
+  
+ActionController::RoutingError (uninitialized constant PostsController)
+Caused by: ActionDispatch::MissingController (uninitialized constant PostsController)
+Caused by: NameError (uninitialized constant PostsController)
+
+Information for: ActionController::RoutingError (uninitialized constant PostsController):
+  
+
+Information for cause: ActionDispatch::MissingController (uninitialized constant PostsController):
+  
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:102:in `rescue in controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:98:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+
+Information for cause: NameError (uninitialized constant PostsController):
+  
+activesupport (8.0.1) lib/active_support/inflector/methods.rb:290:in `constantize'
+activesupport (8.0.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:99:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/posts" for ::1 at 2025-03-10 15:08:19 +0530
+  
+ActionController::RoutingError (uninitialized constant PostsController)
+Caused by: ActionDispatch::MissingController (uninitialized constant PostsController)
+Caused by: NameError (uninitialized constant PostsController)
+
+Information for: ActionController::RoutingError (uninitialized constant PostsController):
+  
+
+Information for cause: ActionDispatch::MissingController (uninitialized constant PostsController):
+  
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:102:in `rescue in controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:98:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+
+Information for cause: NameError (uninitialized constant PostsController):
+  
+activesupport (8.0.1) lib/active_support/inflector/methods.rb:290:in `constantize'
+activesupport (8.0.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:99:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started POST "/login" for ::1 at 2025-03-10 15:14:21 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `login'
+Completed 401 Unauthorized in 365ms (Views: 0.2ms | ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-10 15:14:29 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `login'
+Completed 200 OK in 359ms (Views: 0.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 15:14:30 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/blogs"):
+  
+Started GET "/blogs" for ::1 at 2025-03-10 15:14:30 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/blogs"):
+  
+Started GET "/blogs" for ::1 at 2025-03-10 15:14:39 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/blogs"):
+  
+Started GET "/blogs" for ::1 at 2025-03-10 15:14:40 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/blogs"):
+  
+Started GET "/blogs" for ::1 at 2025-03-10 15:15:45 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2025-03-10 15:15:46 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/login" for ::1 at 2025-03-10 15:16:20 +0530
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `login'
+Completed 200 OK in 445ms (Views: 1.2ms | ActiveRecord: 7.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 15:16:21 +0530
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:16:21 +0530
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:17:00 +0530
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:17:01 +0530
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:22:16 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:22:17 +0530
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:25:37 +0530
+Processing by BlogsController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `secrets' for an instance of Backend::Application):
+  
+app/controllers/application_controller.rb:10:in `authorize_request'
+Started GET "/blogs" for ::1 at 2025-03-10 15:27:52 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `secrets' for an instance of Backend::Application):
+  
+app/controllers/application_controller.rb:11:in `authorize_request'
+Started GET "/blogs" for ::1 at 2025-03-10 15:30:10 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:31:14 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:31:17 +0530
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:31:21 +0530
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:31:22 +0530
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:33:11 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:33:11 +0530
+Processing by BlogsController#index as HTML
+Completed 404 Not Found in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+AbstractController::ActionNotFound (The show action could not be found for the :authorize_request
+callback on BlogsController, but it is listed in the controller's
+:except option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:390:in `block in inverted_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `all?'
+activesupport (8.0.1) lib/active_support/callbacks.rb:177:in `call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `block in invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in `invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:108:in `run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in `process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in `dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.11) lib/rack/etag.rb:29:in `call'
+rack (3.1.11) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.11) lib/rack/head.rb:15:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.11) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.11) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/blogs" for ::1 at 2025-03-10 15:34:35 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (3.0ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 83ms (Views: 2.4ms | ActiveRecord: 5.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 15:34:35 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 15:35:06 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Backend'*/[0m
+  [1m[36mUser Load (4.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mBlog Create (0.3ms)[0m  [1m[32mINSERT INTO "blogs" ("title", "description", "user_id", "created_at", "updated_at") VALUES ('My First Blog', 'I''ve created this blog to make sure API is working', 1, '2025-03-10 10:06:59.606270', '2025-03-10 10:06:59.606270') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Backend'*/[0m
+Started GET "/blogs" for ::1 at 2025-03-10 15:38:05 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (3.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 101ms (Views: 15.1ms | ActiveRecord: 6.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 15:38:05 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 15:40:12 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-10 15:40:32 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"New Blog ", "description"=>"Hello ", "blog"=>{"title"=>"New Blog ", "description"=>"Hello "}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-10 15:43:48 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"hey", "description"=>"chal chal", "blog"=>{"title"=>"hey", "description"=>"chal chal"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-10 15:43:53 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"hey", "description"=>"chal chal", "blog"=>{"title"=>"hey", "description"=>"chal chal"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-10 15:44:58 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `login'
+Completed 200 OK in 469ms (Views: 1.2ms | ActiveRecord: 9.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 15:44:59 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.5ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 32ms (Views: 18.9ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 15:44:59 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-10 15:45:12 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"Hello", "description"=>"Haaaa", "blog"=>{"title"=>"Hello", "description"=>"Haaaa"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-10 15:47:19 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"Hello", "description"=>"Haaaa", "blog"=>{"title"=>"Hello", "description"=>"Haaaa"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/blogs/1" for ::1 at 2025-03-10 15:47:23 +0530
+Processing by BlogsController#destroy as HTML
+  Parameters: {"id"=>"1"}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/blogs/1" for ::1 at 2025-03-10 15:47:28 +0530
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"My First Blog", "description"=>"I've created this blog to make sure API is working", "id"=>"1", "blog"=>{"title"=>"My First Blog", "description"=>"I've created this blog to make sure API is working"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/blogs/1" for ::1 at 2025-03-10 15:51:06 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"My First Blog", "description"=>"I've created this blog to make sure API is working", "id"=>"1", "blog"=>{"title"=>"My First Blog", "description"=>"I've created this blog to make sure API is working"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 3.4ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/blogs/1" for ::1 at 2025-03-10 15:51:11 +0530
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"My First Blog", "description"=>"I've created this blog to make sure API is working", "id"=>"1", "blog"=>{"title"=>"My First Blog", "description"=>"I've created this blog to make sure API is working"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/blogs/1" for ::1 at 2025-03-10 15:53:21 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"My First Blog", "description"=>"I've created this blog to make sure API is working", "id"=>"1", "blog"=>{"title"=>"My First Blog", "description"=>"I've created this blog to make sure API is working"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 3.4ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-10 16:09:38 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:16:in `login'
+Completed 200 OK in 684ms (Views: 1.5ms | ActiveRecord: 7.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 16:09:40 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 56ms (Views: 45.5ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 16:09:40 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-10 16:09:53 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"hello", "description"=>"very nice blog", "blog"=>{"title"=>"hello", "description"=>"very nice blog"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-10 16:27:42 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"hello", "description"=>"very nice blog", "blog"=>{"title"=>"hello", "description"=>"very nice blog"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 4.1ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 16:27:45 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 61ms (Views: 13.8ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 16:27:45 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-10 16:27:57 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"hello", "description"=>"hi", "blog"=>{"title"=>"hello", "description"=>"hi"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1 /*application='Backend'*/[0m
+Started GET "/blogs" for 127.0.0.1 at 2025-03-10 16:35:52 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (4.6ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 142ms (Views: 34.6ms | ActiveRecord: 7.0ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started PUT "/blogs/1" for 127.0.0.1 at 2025-03-10 16:36:05 +0530
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"My First Blog", "description"=>"I've created this blog to make sure API ", "id"=>"1", "blog"=>{"title"=>"My First Blog", "description"=>"I've created this blog to make sure API "}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/blogs/1" for ::1 at 2025-03-10 16:38:31 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"My First Blog", "description"=>"I've created this blog to make sure API ", "id"=>"1", "blog"=>{"title"=>"My First Blog", "description"=>"I've created this blog to make sure API "}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.19Ej2pv6vit7S7jKXPNoa-xK4SJiHvijRqHva_WWtGM
+🔑 Secret Key Used: a2f2b31ab59c95fc51889adb1192a9f986566cd29016628d16ba8fa49e512df888989e1eda2db69154de976a08817c465bc82d27aa1aa2b30cb478f7e3e9cbde
+❌ JWT Decode Error: Signature verification failed
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 6ms (Views: 0.3ms | ActiveRecord: 4.2ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-03-10 17:18:27 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true, "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]", "withCredentials"=>true}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'raj@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/auth_controller.rb:17:in `login'
+Completed 200 OK in 448ms (Views: 1.5ms | ActiveRecord: 5.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 17:18:28 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 44ms (Views: 32.0ms | ActiveRecord: 3.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 17:18:28 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 6ms (Views: 5.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/blogs/1" for ::1 at 2025-03-10 17:18:41 +0530
+Processing by BlogsController#update as HTML
+  Parameters: {"title"=>"My First Blog", "description"=>"I've created this blog to make sure", "id"=>"1", "blog"=>{"title"=>"My First Blog", "description"=>"I've created this blog to make sure"}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.RE7t90K40bnmzIuzGo3K3m9Hfe8UafMQU0Iw_7k1oHo
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>1}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 1, name: "Raj", email: [FILTERED], password: nil, created_at: "2025-03-10 09:21:56.672407000 +0000", updated_at: "2025-03-10 09:21:56.672407000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 1 AND "blogs"."id" = 1 LIMIT 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:27:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:28:in `update'
+  [1m[36mBlog Update (7.0ms)[0m  [1m[33mUPDATE "blogs" SET "description" = 'I''ve created this blog to make sure', "updated_at" = '2025-03-10 11:48:41.529587' WHERE "blogs"."id" = 1 /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='update',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:28:in `update'
+Completed 200 OK in 104ms (Views: 1.1ms | ActiveRecord: 10.0ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 17:18:41 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/blogs" for ::1 at 2025-03-10 17:19:00 +0530
+Processing by BlogsController#create as HTML
+  Parameters: {"title"=>"heelo jii", "description"=>"my life", "blog"=>{"title"=>"heelo jii", "description"=>"my life"}}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.RE7t90K40bnmzIuzGo3K3m9Hfe8UafMQU0Iw_7k1oHo
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>1}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 1, name: "Raj", email: [FILTERED], password: nil, created_at: "2025-03-10 09:21:56.672407000 +0000", updated_at: "2025-03-10 09:21:56.672407000 +0000", password_digest: [FILTERED]>
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+  [1m[36mBlog Create (4.9ms)[0m  [1m[32mINSERT INTO "blogs" ("title", "description", "user_id", "created_at", "updated_at") VALUES ('heelo jii', 'my life', 1, '2025-03-10 11:49:00.930375', '2025-03-10 11:49:00.930375') RETURNING "id" /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:19:in `create'
+Completed 201 Created in 25ms (Views: 1.3ms | ActiveRecord: 5.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 17:19:00 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.6ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/blogs/2" for ::1 at 2025-03-10 17:19:04 +0530
+Processing by BlogsController#destroy as HTML
+  Parameters: {"id"=>"2"}
+🔍 Incoming Token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.RE7t90K40bnmzIuzGo3K3m9Hfe8UafMQU0Iw_7k1oHo
+🔑 Secret Key Used: cb8a3495729c45851258d68ccb648e029f59b204ca7f06b618417b0456e65f390075474c401631e7ab5f0d1167f8dac84a8881bd54bf9bc40147c293de739bc0
+✅ Decoded Token: {"user_id"=>1}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:61:in `authorize_request'
+👤 Current User: #<User id: 1, name: "Raj", email: [FILTERED], password: nil, created_at: "2025-03-10 09:21:56.672407000 +0000", updated_at: "2025-03-10 09:21:56.672407000 +0000", password_digest: [FILTERED]>
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = 1 AND "blogs"."id" = 2 LIMIT 1 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:36:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+  [1m[36mBlog Destroy (3.6ms)[0m  [1m[31mDELETE FROM "blogs" WHERE "blogs"."id" = 2 /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='destroy',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:37:in `destroy'
+Completed 200 OK in 27ms (Views: 0.2ms | ActiveRecord: 4.6ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 17:19:04 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 17:19:08 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/blogs" for ::1 at 2025-03-10 17:19:08 +0530
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.2ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs" /*action='index',application='Backend',controller='blogs'*/[0m
+  ↳ app/controllers/blogs_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
